@@ -21,7 +21,7 @@ Durante o desenvolvimento, contei com o apoio de ferramentas de Inteligência Ar
 
 - **ChatGPT (OpenAI)** — Geração de Prompts para obter sempre os melhores resultados e auxilio no desenvolvimento do README
 - **DeepSeek** — Auxílio na resolução de erros, refatoramento e organização de ideias
-- **TRAE IDE** — Suporte de código, estrutura de pastas e boas práticas em tempo real (Usada para substituir o Cursor)
+- **TRAE IDE** — Suporte de código, estrutura de pastas e boas práticas em tempo real (Usada para substituir o Cursor com - custo e + eficácia)
 - **Figma AI** — Protótipo visual do sistema via IA, responsivo e moderno
 
 Protótipo visual com Figma: [Figma STG E-commerce Protótipo](https://www.figma.com/make/68DP6frWCkJ6elIfsCeyle/STG-E-commerce-Prot%C3%B3tipo?t=ITl7EZuhu8VuKSM6-1)
