@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# STG Catalog Challenge
 
-## Getting Started
+## ✨ Sobre o Projeto
 
-First, run the development server:
+O **STG Catalog** é um sistema completo de e-commerce desenvolvido como parte do desafio técnico da **STG Company**. A aplicação permite que usuários se autentiquem, naveguem por um catálogo de produtos, adicionem itens ao carrinho e finalizem pedidos via **integração com WhatsApp**.
+
+O projeto foi desenvolvido com foco em **modularidade, responsividade e experiência do usuário**, utilizando ferramentas modernas e Inteligência Artificial para acelerar e qualificar o processo de desenvolvimento.
+
+## 🚀 Tecnologias Utilizadas
+
+- **TypeScript** — Tipagem estática robusta para JavaScript
+- **React + Next.js (App Router)** — Framework para aplicações web modernas com SSR e rotas seguras
+- **Supabase** — Backend-as-a-service (Auth + banco de dados)
+- **Tailwind CSS** — Estilização moderna e responsiva com utilitários
+- **Lucide React** — Pacote de ícones elegante e leve
+- **Vercel** — Deploy instantâneo e otimizado para Next.js
+
+## 🤖 IA Utilizada
+
+Durante o desenvolvimento, contei com o apoio de ferramentas de Inteligência Artificial para otimizar a produtividade, qualidade do código e design:
+
+- **ChatGPT (OpenAI)** — Geração de Prompts para obter sempre os melhores resultados e auxilio no desenvolvimento do README
+- **DeepSeek** — Auxílio na resolução de erros, refatoramento e organização de ideias
+- **TRAE IDE** — Suporte de código, estrutura de pastas e boas práticas em tempo real (Usada para substituir o Cursor)
+- **Figma AI** — Protótipo visual do sistema via IA, responsivo e moderno
+
+Protótipo visual com Figma: [Figma STG E-commerce Protótipo](https://www.figma.com/make/68DP6frWCkJ6elIfsCeyle/STG-E-commerce-Prot%C3%B3tipo?t=ITl7EZuhu8VuKSM6-1)
+
+## ⚡ Como Rodar Localmente
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 1. Clone o repositório
+$ git clone https://github.com/AiltonMazullo/stg-catalog-challenge
+
+# 2. Acesse a pasta do projeto
+$ cd stg-catalog-challenge
+
+# 3. Instale as dependências
+$ npm install
+
+# 4. Configure variáveis de ambiente (arquivo .env.local)
+SUPABASE_URL=...
+SUPABASE_ANON_KEY=...
+
+# 5. Rode o projeto localmente
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O sistema estará disponível em `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔗 Links Importantes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Deploy da Aplicação (Vercel)](https://stg-catalog-challenge.vercel.app)
+- [Repositório no GitHub](https://github.com/AiltonMazullo/stg-catalog-challenge)
 
-## Learn More
+## 📃 Checklist de Funcionalidades
 
-To learn more about Next.js, take a look at the following resources:
+### 🔐 Autenticação (Supabase)
+- [x] Login com email/senha
+- [x] Registro de novos usuários
+- [ ] Logout funcional
+- [x] Proteção de rotas privadas
+- [ ] Recuperação de senha (diferencial)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🛍️ Catálogo
+- [x] Grid responsivo com 12+ produtos
+- [ ] Busca e filtro por nome
+- [x] Visualização detalhada via modal/página
+- [x] Adicionar ao carrinho
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🛒 Carrinho de Compras
+- [x] Listagem dos produtos
+- [x] Editar quantidades
+- [x] Remover itens
+- [ ] Finalizar pedido via WhatsApp
 
-## Deploy on Vercel
+### 📣 Integração WhatsApp
+- [ ] Geração de mensagem formatada
+- [ ] Redirecionamento automático para wa.me
+- [ ] Limpeza do carrinho após envio
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🕺 Diferenciais Extras
+- [ ] Confirmação de pedido antes do envio
+- [ ] Toast notifications (feedback visual)
+- [x] Design responsivo (mobile/tablet/desktop)
+- [ ] Dark mode toggle
+- [ ] Histórico de pedidos (em desenvolvimento)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌌 Observações Finais
+
+Este projeto representa um ecossistema completo de e-commerce, com foco em escalabilidade, usabilidade e uso consciente de Inteligência Artificial. Ele explora diferenciais que enriquecem a experiência do usuário e demonstram meu comprometimento com qualidade.
+
+---
+
+**Desafio Técnico - Ailton Rodrigues Mazullo Neto**  
+Desenvolvedor FullStack com foco em **TypeScript e IACODE**  
+Email: ailtonrodriguesdev@gmail.com
+Telefone: +55 81 9 9239-2899
+
