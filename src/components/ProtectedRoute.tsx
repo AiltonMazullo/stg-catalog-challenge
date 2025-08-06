@@ -4,20 +4,21 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
-export default function Home() {
-  const router = useRouter();
+interface ProtectedRouteProps {
+  children: React.ReactNode;
+}
+
+export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, isLoading } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading) {
-      if (user) {
-        router.push('/products');
-      } else {
-        router.push('/login');
-      }
+    if (!isLoading && !user) {
+      router.push('/login');
     }
   }, [user, isLoading, router]);
 
+  // Mostrar loading enquanto verifica autenticação
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -29,5 +30,11 @@ export default function Home() {
     );
   }
 
-  return null;
+  // Se não há usuário, não renderizar nada (redirecionamento já foi feito)
+  if (!user) {
+    return null;
+  }
+
+  // Se há usuário, renderizar o conteúdo
+  return <>{children}</>;
 }

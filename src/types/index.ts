@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 
 // Tipagens para o componente Input
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,8 +8,8 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 // Tipagens para o componente Button
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "primary" | "secondary" | "outline";
+  size?: "sm" | "md" | "lg";
   isLoading?: boolean;
   fullWidth?: boolean;
 }
@@ -35,7 +35,27 @@ export interface CardFooterProps {
   className?: string;
 }
 
-// Tipagens para autenticação
+// Tipagens para produtos
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  stock: number;
+  image_url: string;
+  created_at: string;
+}
+
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface User {
   id: string;
   email: string;
@@ -48,4 +68,5 @@ export interface AuthContextType {
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, fullName: string) => Promise<void>;
   signOut: () => Promise<void>;
+  refreshSession: () => Promise<void>;
 }

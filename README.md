@@ -58,14 +58,15 @@ O sistema estará disponível em `http://localhost:3000`
 ### 🔐 Autenticação (Supabase)
 - [x] Login com email/senha
 - [x] Registro de novos usuários
+- [x] Autenticação Registro e Login
 - [ ] Logout funcional
 - [x] Proteção de rotas privadas
-- [ ] Recuperação de senha (diferencial)
+- [ ] Recuperação de senha 
 
 ### 🛍️ Catálogo
 - [x] Grid responsivo com 12+ produtos
-- [ ] Busca e filtro por nome
-- [x] Visualização detalhada via modal/página
+- [x] Busca por filtro e nome
+- [x] Visualização detalhada (Nome, descrição, preço, imagem) do produto via modal ao clicar no nome do produto
 - [x] Adicionar ao carrinho
 
 ### 🛒 Carrinho de Compras
@@ -80,11 +81,12 @@ O sistema estará disponível em `http://localhost:3000`
 - [ ] Limpeza do carrinho após envio
 
 ### 🕺 Diferenciais Extras
+- [ ] Testes Unitários
+- [ ] PWA
 - [ ] Confirmação de pedido antes do envio
-- [ ] Toast notifications (feedback visual)
 - [x] Design responsivo (mobile/tablet/desktop)
-- [ ] Dark mode toggle
-- [ ] Histórico de pedidos (em desenvolvimento)
+- [x] Dark mode
+- [ ] Histórico de pedidos 
 
 ## 🌌 Observações Finais
 
