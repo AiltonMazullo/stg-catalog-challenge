@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import { useTheme } from "@/context/ThemeContext";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { signIn } = useAuth();
   const { isDarkMode } = useTheme();
 
@@ -18,6 +19,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // Obter URL de redirecionamento dos parâmetros de busca
+  const redirectTo = searchParams.get('redirectTo') || '/products';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,8 +32,8 @@ export default function LoginPage() {
     try {
       console.log("Chamando signIn...");
       await signIn(email, password);
-      console.log("SignIn concluído, redirecionando...");
-      router.push("/products");
+      console.log("SignIn concluído, redirecionando para:", redirectTo);
+      router.push(redirectTo);
     } catch (err) {
       console.error("Erro no handleSubmit:", err);
       setError(err instanceof Error ? err.message : "Erro ao fazer login");
@@ -119,14 +123,22 @@ export default function LoginPage() {
               </div>
 
               <div>
-                <label
-                  htmlFor="password"
-                  className={`block text-sm font-medium ${
-                    isDarkMode ? "text-gray-300" : "text-gray-700"
-                  } mb-1`}
-                >
-                  Senha
-                </label>
+                <div className="flex items-center justify-between mb-1">
+                  <label
+                    htmlFor="password"
+                    className={`text-sm font-medium ${
+                      isDarkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
+                    Senha
+                  </label>
+                  <Link
+                    href="/forgot-password"
+                    className="text-sm text-green-600 hover:text-green-700 font-medium"
+                  >
+                    Esqueceu sua senha?
+                  </Link>
+                </div>
                 <Input
                   id="password"
                   type="password"

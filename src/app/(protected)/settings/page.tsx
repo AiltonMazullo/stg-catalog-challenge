@@ -21,8 +21,6 @@ import {
   Eye,
   EyeOff,
   ShoppingBag,
-  Facebook,
-  Chrome,
   Edit2,
   Check,
   X,
@@ -84,14 +82,14 @@ export default function SettingsPage() {
 
   const handlePasswordChange = () => {
     if (newPassword !== confirmPassword) {
-      alert("As senhas não coincidem!");
+      toast.error("As senhas não coincidem!");
       return;
     }
     if (newPassword.length < 6) {
-      alert("A nova senha deve ter pelo menos 6 caracteres!");
+      toast.error("A nova senha deve ter pelo menos 6 caracteres!");
       return;
     }
-    alert("Senha alterada com sucesso!");
+    toast.success("Senha alterada com sucesso!");
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
@@ -651,58 +649,7 @@ export default function SettingsPage() {
                 </div>
               </div>
 
-              {/* Conexões com Redes Sociais */}
-              <div>
-                <h3
-                  className={`text-sm font-medium mb-3 ${
-                    isDarkMode ? "text-gray-300" : "text-gray-700"
-                  }`}
-                >
-                  Conexões Sociais
-                </h3>
 
-                <div className="space-y-2">
-                  <div
-                    className={`flex items-center justify-between p-3 rounded-lg border ${
-                      isDarkMode ? "border-gray-600" : "border-gray-200"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Chrome className="h-5 w-5 text-red-500" />
-                      <span
-                        className={`text-sm ${
-                          isDarkMode ? "text-gray-300" : "text-gray-700"
-                        }`}
-                      >
-                        Google
-                      </span>
-                    </div>
-                    <Button className="px-3 py-1 text-sm border border-gray-300 bg-transparent hover:bg-gray-100 rounded-md transition-colors">
-                      Conectar
-                    </Button>
-                  </div>
-
-                  <div
-                    className={`flex items-center justify-between p-3 rounded-lg border ${
-                      isDarkMode ? "border-gray-600" : "border-gray-200"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Facebook className="h-5 w-5 text-blue-500" />
-                      <span
-                        className={`text-sm ${
-                          isDarkMode ? "text-gray-300" : "text-gray-700"
-                        }`}
-                      >
-                        Facebook
-                      </span>
-                    </div>
-                    <Button className="px-3 py-1 text-sm border border-gray-300 bg-transparent hover:bg-gray-100 rounded-md transition-colors">
-                      Conectar
-                    </Button>
-                  </div>
-                </div>
-              </div>
             </div>
           </section>
 
@@ -748,7 +695,7 @@ export default function SettingsPage() {
                         isDarkMode ? "text-gray-400" : "text-gray-500"
                       }`}
                     >
-                      Acompanhe o status dos seus pedidos
+                      Veja seu histórico de pedidos
                     </p>
                   </div>
                 </div>

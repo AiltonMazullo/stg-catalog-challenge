@@ -4,8 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
+import { useFavoriteList } from "@/context/FavoriteList";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
+import { useOrders } from "@/context/OrderContext";
+import toast from "react-hot-toast";
+import ConfirmationModal from "@/components/ui/ConfirmationModal";
 
 import {
   ArrowLeft,
@@ -15,6 +19,8 @@ import {
   Minus,
   Plus,
   Trash2,
+  Heart,
+  Settings,
 } from "lucide-react";
 
 export default function CartPage() {
@@ -25,9 +31,13 @@ export default function CartPage() {
     getTotalItems,
     getTotalPrice,
   } = useCart();
+  const { getTotalItems: getFavoriteListTotalItems } = useFavoriteList();
   const { signOut, user } = useAuth();
+  const { addOrder } = useOrders();
   const router = useRouter();
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [pendingOrderData, setPendingOrderData] = useState<any>(null);
   const { isDarkMode, toggleDarkMode } = useTheme();
 
   const handleLogout = async () => {
@@ -70,6 +80,102 @@ export default function CartPage() {
     }).format(price);
   };
 
+  const handleFinalizePedido = () => {
+    if (items.length === 0) {
+      toast.error("Seu carrinho está vazio!");
+      return;
+    }
+
+    const userName = getUserName(user);
+    const userEmail = user?.email || "Não informado";
+    
+    // Preparar dados do pedido 
+    const orderItems = items.map(item => ({
+      id: item.id,
+      name: item.name,
+      quantity: item.quantity,
+      price: item.price
+    }));
+    
+    const pendingOrder = {
+      items: orderItems,
+      total: getTotalPrice(),
+      customerName: userName,
+      customerEmail: userEmail
+    };
+    
+    let message = `*NOVO PEDIDO - STG CATALOG*\n\n`;
+    message += `*Cliente:* ${userName}\n`;
+    message += `*Email:* ${userEmail}\n\n`;
+    message += `*PRODUTOS:*\n`;
+    
+    items.forEach(item => {
+      message += `- ${item.name} - Qtd: ${item.quantity} - ${formatPrice(item.price * item.quantity)}\n`;
+    });
+    
+    message += `\n*TOTAL: ${formatPrice(getTotalPrice())}*\n\n`;
+    message += `---\nPedido realizado via STG Catalog`;
+    
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Número do WhatsApp (substitua pelo número que vai receber o Pedido.)
+    const whatsappNumber = 5581992392899; // Formato: código do país + DDD + número 
+    
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    
+    // Abrir WhatsApp
+    window.open(whatsappUrl, "_blank");
+    
+    // Preparar dados para confirmação
+    setPendingOrderData(pendingOrder);
+    
+    // Detectar quando usuário volta para a aba e mostrar modal de confirmação
+    const handleFocus = () => {
+      // Aguardar um pouco para garantir que o usuário teve tempo de enviar
+      setTimeout(() => {
+        setShowConfirmationModal(true);
+        
+        // Remover o listener após usar
+        window.removeEventListener('focus', handleFocus);
+      }, 500);
+    };
+    
+    // Adicionar listener para detectar quando volta do WhatsApp
+    setTimeout(() => {
+      window.addEventListener('focus', handleFocus);
+      
+      // Remover listener automaticamente após 2 minutos (fallback)
+      setTimeout(() => {
+        window.removeEventListener('focus', handleFocus);
+      }, 120000);
+    }, 1000);
+    
+    toast.success("📱 WhatsApp aberto! Envie a mensagem e volte para confirmar.");
+  };
+
+  const handleConfirmSent = () => {
+    if (pendingOrderData) {
+      // Salvar pedido no histórico
+      addOrder(pendingOrderData);
+      
+      // Limpar carrinho
+      items.forEach(item => {
+        removeFromCart(item.id);
+      });
+      
+      toast.success("✅ Pedido registrado no histórico! Carrinho limpo.");
+    }
+    
+    setShowConfirmationModal(false);
+    setPendingOrderData(null);
+  };
+
+  const handleConfirmCancel = () => {
+    toast.error("❌ Pedido não foi registrado. Tente novamente quando enviar a mensagem.");
+    setShowConfirmationModal(false);
+    setPendingOrderData(null);
+  };
+
   return (
     <div
       className={`min-h-screen flex flex-col ${
@@ -106,7 +212,7 @@ export default function CartPage() {
             <div className="relative">
               <button
                 onClick={() => setShowProfileModal(!showProfileModal)}
-                className="p-2"
+                className="p-2 cursor-pointer"
                 aria-label="Abrir perfil"
               >
                 <User
@@ -139,6 +245,19 @@ export default function CartPage() {
                     </div>
 
                     <div className="space-y-3">
+                      <Link
+                        href="/settings"
+                        onClick={() => setShowProfileModal(false)}
+                        className={`w-full text-left px-3 py-2 text-sm rounded flex items-center gap-2 ${
+                          isDarkMode
+                            ? "text-gray-300 hover:bg-gray-700"
+                            : "text-gray-700 hover:bg-gray-100"
+                        }`}
+                      >
+                        <Settings className="h-4 w-4" />
+                        <span>Configurações</span>
+                      </Link>
+
                       <button
                         onClick={toggleDarkMode}
                         className={`w-full text-left px-3 py-2 text-sm rounded flex items-center justify-between ${
@@ -163,7 +282,7 @@ export default function CartPage() {
 
                       <button
                         onClick={handleLogout}
-                        className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded ${
+                        className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded cursor-pointer ${
                           isDarkMode ? "hover:bg-red-900/20" : "hover:bg-red-50"
                         }`}
                       >
@@ -173,7 +292,7 @@ export default function CartPage() {
                   </div>
                 </>
               )}
-            </div>
+        </div>
           </div>
         </div>
       </header>
@@ -271,7 +390,7 @@ export default function CartPage() {
                             onClick={() =>
                               updateQuantity(item.id, item.quantity - 1)
                             }
-                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
                               isDarkMode
                                 ? "bg-gray-700 text-gray-300 hover:bg-gray-600 active:bg-gray-500"
                                 : "bg-gray-100 text-gray-600 hover:bg-gray-200 active:bg-gray-300"
@@ -291,7 +410,7 @@ export default function CartPage() {
                             onClick={() =>
                               updateQuantity(item.id, item.quantity + 1)
                             }
-                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
                               isDarkMode
                                 ? "bg-gray-700 text-gray-300 hover:bg-gray-600 active:bg-gray-500"
                                 : "bg-gray-100 text-gray-600 hover:bg-gray-200 active:bg-gray-300"
@@ -303,7 +422,7 @@ export default function CartPage() {
                         </div>
                         <button
                           onClick={() => removeFromCart(item.id)}
-                          className="text-red-500 hover:text-red-700 p-2 transition-colors"
+                          className="text-red-500 hover:text-red-700 p-2 transition-colors cursor-pointer"
                           aria-label="Remover item do carrinho"
                         >
                           <Trash2 className="w-5 h-5" />
@@ -354,7 +473,7 @@ export default function CartPage() {
                         onClick={() =>
                           updateQuantity(item.id, item.quantity - 1)
                         }
-                        className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                        className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
                           isDarkMode
                             ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
                             : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -374,7 +493,7 @@ export default function CartPage() {
                         onClick={() =>
                           updateQuantity(item.id, item.quantity + 1)
                         }
-                        className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                        className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
                           isDarkMode
                             ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
                             : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -386,7 +505,7 @@ export default function CartPage() {
                     </div>
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="text-red-500 hover:text-red-700 p-1 transition-colors"
+                      className="text-red-500 hover:text-red-700 p-1 transition-colors cursor-pointer"
                       aria-label="Remover item do carrinho"
                     >
                       <Trash2 className="w-5 h-5" />
@@ -436,7 +555,8 @@ export default function CartPage() {
                 variant="primary"
                 size="md"
                 fullWidth
-                className="py-4 text-base sm:text-lg font-semibold"
+                className="py-4 text-base sm:text-lg font-semibold cursor-pointer"
+                onClick={handleFinalizePedido}
               >
                 Finalizar Pedido
               </Button>
@@ -474,6 +594,23 @@ export default function CartPage() {
           <span className="text-xs mt-1">Home</span>
         </Link>
 
+        <Link
+          href="/favorite"
+          className={`flex flex-col items-center ${
+            isDarkMode ? "text-gray-400" : "text-gray-500"
+          }`}
+        >
+          <div className="relative">
+            <Heart className="h-6 w-6" />
+            {getFavoriteListTotalItems() > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                {getFavoriteListTotalItems()}
+              </span>
+            )}
+          </div>
+          <span className="text-xs mt-1">Desejos</span>
+        </Link>
+
         <div className="flex flex-col items-center text-green-500">
           <div className="relative">
             <ShoppingCart className="h-6 w-6" />
@@ -487,7 +624,7 @@ export default function CartPage() {
         <div className="relative">
           <button
             onClick={() => setShowProfileModal(!showProfileModal)}
-            className={`flex flex-col items-center ${
+            className={`flex flex-col items-center cursor-pointer ${
               isDarkMode ? "text-gray-400" : "text-gray-500"
             }`}
             aria-label="Abrir perfil"
@@ -516,6 +653,19 @@ export default function CartPage() {
                 </div>
 
                 <div className="space-y-3">
+                  <Link
+                    href="/settings"
+                    onClick={() => setShowProfileModal(false)}
+                    className={`w-full text-left px-3 py-2 text-sm rounded flex items-center gap-2 ${
+                      isDarkMode
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    <Settings className="h-4 w-4" />
+                    <span>Configurações</span>
+                  </Link>
+
                   <button
                     onClick={toggleDarkMode}
                     className={`w-full text-left px-3 py-2 text-sm rounded flex items-center justify-between ${
@@ -540,7 +690,7 @@ export default function CartPage() {
 
                   <button
                     onClick={handleLogout}
-                    className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded ${
+                    className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded cursor-pointer ${
                       isDarkMode ? "hover:bg-red-900/20" : "hover:bg-red-50"
                     }`}
                   >
@@ -552,6 +702,17 @@ export default function CartPage() {
           )}
         </div>
       </div>
+
+      {/* Modal de Confirmação */}
+      <ConfirmationModal
+        isOpen={showConfirmationModal}
+        onConfirm={handleConfirmSent}
+        onCancel={handleConfirmCancel}
+        title="Confirmar Envio"
+        message="Você enviou a mensagem no WhatsApp?"
+        confirmText="Sim, enviei"
+        cancelText="Não enviei"
+      />
     </div>
   );
 }

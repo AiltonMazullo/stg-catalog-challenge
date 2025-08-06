@@ -5,12 +5,21 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
+import { useFavoriteList } from "@/context/FavoriteList";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
-import { Home, ShoppingCart, User, ArrowLeft, AlertCircle } from "lucide-react";
+import {
+  Home,
+  ShoppingCart,
+  User,
+  ArrowLeft,
+  AlertCircle,
+  Heart,
+} from "lucide-react";
 
 export default function NotFoundPage() {
   const { getTotalItems } = useCart();
+  const { getTotalItems: getFavoriteListTotalItems } = useFavoriteList();
   const { signOut, user } = useAuth();
   const router = useRouter();
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -151,7 +160,7 @@ export default function NotFoundPage() {
 
                         <button
                           onClick={handleLogout}
-                          className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded ${
+                          className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded cursor-pointer ${
                             isDarkMode
                               ? "hover:bg-red-900/20"
                               : "hover:bg-red-50"
@@ -258,6 +267,21 @@ export default function NotFoundPage() {
           <span className="text-xs mt-1">Home</span>
         </Link>
 
+        <Link
+          href="/favorite"
+          className="flex flex-col items-center text-gray-500"
+        >
+          <div className="relative">
+            <Heart className="h-6 w-6" />
+            {getFavoriteListTotalItems() > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                {getFavoriteListTotalItems()}
+              </span>
+            )}
+          </div>
+          <span className="text-xs mt-1">Desejos</span>
+        </Link>
+
         <Link href="/cart" className="flex flex-col items-center text-gray-500">
           <div className="relative">
             <ShoppingCart className="h-6 w-6" />
@@ -325,7 +349,7 @@ export default function NotFoundPage() {
 
                     <button
                       onClick={handleLogout}
-                      className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded ${
+                      className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded cursor-pointer ${
                         isDarkMode ? "hover:bg-red-900/20" : "hover:bg-red-50"
                       }`}
                     >

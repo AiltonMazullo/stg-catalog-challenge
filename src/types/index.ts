@@ -70,3 +70,12 @@ export interface AuthContextType {
   signOut: () => Promise<void>;
   refreshSession: () => Promise<void>;
 }
+
+export interface FavoriteListContextType {
+  items: Product[];
+  addToFavoriteList: (product: Product) => void;
+  removeFromFavoriteList: (productId: string) => void;
+  isInFavoriteList: (productId: string) => boolean;
+  clearFavoriteList: () => void;
+  getTotalItems: () => number;
+}

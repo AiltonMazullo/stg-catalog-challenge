@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { fetchProducts } from "@/services/products.api";
 import { useCart } from "@/context/CartContext";
+import { useFavoriteList } from "@/context/FavoriteList";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -20,6 +21,7 @@ import {
   Calendar,
   Tag,
   Settings,
+  Heart,
 } from "lucide-react";
 
 export default function ProductsPage() {
@@ -36,6 +38,12 @@ export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const { isDarkMode, toggleDarkMode } = useTheme();
   const { addToCart, getTotalItems } = useCart();
+  const {
+    addToFavoriteList,
+    removeFromFavoriteList,
+    isInFavoriteList,
+    getTotalItems: getFavoriteListTotalItems,
+  } = useFavoriteList();
   const { signOut, user } = useAuth();
 
   const router = useRouter();
@@ -116,6 +124,14 @@ export default function ProductsPage() {
     addToCart(product);
   };
 
+  const handleToggleFavoriteList = (product: Product) => {
+    if (isInFavoriteList(product.id)) {
+      removeFromFavoriteList(product.id);
+    } else {
+      addToFavoriteList(product);
+    }
+  };
+
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("pt-BR", {
       style: "currency",
@@ -190,7 +206,7 @@ export default function ProductsPage() {
                   isDarkMode ? "text-white" : "text-gray-900"
                 }`}
               >
-                STG Store
+                STG Catalog
               </h1>
               <p
                 className={`text-xs ${
@@ -202,6 +218,19 @@ export default function ProductsPage() {
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-3">
+            <Link
+              href="/favorite"
+              className={`relative cursor-pointer ${
+                isDarkMode ? "text-gray-300" : "text-gray-600"
+              }`}
+            >
+              <Heart className="h-6 w-6" />
+              {getFavoriteListTotalItems() > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {getFavoriteListTotalItems()}
+                </span>
+              )}
+            </Link>
             <Link
               href="/cart"
               className={`relative ${
@@ -220,7 +249,7 @@ export default function ProductsPage() {
                   setShowTopModal(!showTopModal);
                   setShowBottomModal(false);
                 }}
-                className={`text-sm p-2 rounded-md transition-colors ${
+                className={`text-sm p-2 rounded-md transition-colors cursor-pointer ${
                   isDarkMode
                     ? "text-gray-300 hover:text-gray-100 hover:bg-gray-700"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
@@ -293,7 +322,7 @@ export default function ProductsPage() {
                       <button
                         aria-label="Sair da conta"
                         onClick={handleLogout}
-                        className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded ${
+                        className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded cursor-pointer ${
                           isDarkMode ? "hover:bg-red-900/20" : "hover:bg-red-50"
                         }`}
                       >
@@ -411,17 +440,40 @@ export default function ProductsPage() {
                     </div>
                   </div>
                   <div className="p-3 flex flex-col">
-                    <button
-                      aria-label={`Ver detalhes de ${product.name}`}
-                      onClick={() => openProductModal(product)}
-                      className={`text-sm font-semibold ${
-                        isDarkMode
-                          ? "text-white hover:text-green-400"
-                          : "text-gray-800 hover:text-green-600"
-                      } mb-1 line-clamp-2 text-left transition-colors cursor-pointer`}
-                    >
-                      {product.name}
-                    </button>
+                    <div className="flex items-start justify-between mb-1">
+                      <button
+                        aria-label={`Ver detalhes de ${product.name}`}
+                        onClick={() => openProductModal(product)}
+                        className={`text-sm font-semibold ${
+                          isDarkMode
+                            ? "text-white hover:text-green-400"
+                            : "text-gray-800 hover:text-green-600"
+                        } line-clamp-2 text-left transition-colors cursor-pointer flex-1 mr-2`}
+                      >
+                        {product.name}
+                      </button>
+                      <button
+                        aria-label={`${
+                          isInFavoriteList(product.id)
+                            ? "Remover da"
+                            : "Adicionar à"
+                        } lista de desejos`}
+                        onClick={() => handleToggleFavoriteList(product)}
+                        className={`p-1 rounded-full transition-colors cursor-pointer ${
+                          isInFavoriteList(product.id)
+                            ? "text-red-500 hover:text-red-600"
+                            : isDarkMode
+                            ? "text-gray-400 hover:text-red-500"
+                            : "text-gray-500 hover:text-red-500"
+                        }`}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            isInFavoriteList(product.id) ? "fill-current" : ""
+                          }`}
+                        />
+                      </button>
+                    </div>
                     {product.description && (
                       <p
                         className={`text-xs ${
@@ -474,6 +526,21 @@ export default function ProductsPage() {
         <Link href="/" className="flex flex-col items-center text-green-500">
           <Home className="h-6 w-6" />
           <span className="text-xs mt-1">Início</span>
+        </Link>
+
+        <Link
+          href="/favorite"
+          className="flex flex-col items-center text-gray-500 cursor-pointer"
+        >
+          <div className="relative">
+            <Heart className="h-6 w-6" />
+            {getFavoriteListTotalItems() > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                {getFavoriteListTotalItems()}
+              </span>
+            )}
+          </div>
+          <span className="text-xs mt-1">Desejos</span>
         </Link>
 
         <Link href="/cart" className="flex flex-col items-center text-gray-500">
@@ -558,7 +625,7 @@ export default function ProductsPage() {
                   <button
                     aria-label="Sair da conta"
                     onClick={handleLogout}
-                    className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded ${
+                    className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded cursor-pointer ${
                       isDarkMode ? "hover:bg-red-900/20" : "hover:bg-red-50"
                     }`}
                   >
@@ -590,7 +657,7 @@ export default function ProductsPage() {
                 <button
                   aria-label="Fechar detalhes do produto"
                   onClick={closeProductModal}
-                  className={`p-1 rounded-full hover:bg-gray-100 ${
+                  className={`p-1 rounded-full hover:bg-gray-100 cursor-pointer ${
                     isDarkMode
                       ? "hover:bg-gray-700 text-gray-400"
                       : "text-gray-500"
@@ -667,7 +734,7 @@ export default function ProductsPage() {
                 </div>
 
                 <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mb-3">
                     <span
                       className={`text-lg font-bold ${
                         isDarkMode ? "text-white" : "text-gray-800"
@@ -675,13 +742,39 @@ export default function ProductsPage() {
                     >
                       {formatPrice(selectedProduct.price)}
                     </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      aria-label={`${isInFavoriteList(selectedProduct.id) ? 'Remover' : 'Adicionar'} ${selectedProduct.name} ${isInFavoriteList(selectedProduct.id) ? 'dos' : 'aos'} favoritos`}
+                      onClick={() => {
+                        if (isInFavoriteList(selectedProduct.id)) {
+                          removeFromFavoriteList(selectedProduct.id);
+                        } else {
+                          addToFavoriteList(selectedProduct);
+                        }
+                      }}
+                      className={`flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
+                        isInFavoriteList(selectedProduct.id)
+                          ? "bg-red-500 hover:bg-red-600 text-white"
+                          : isDarkMode
+                          ? "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
+                          : "bg-white hover:bg-gray-50 text-gray-700 border border-gray-300"
+                      }`}
+                    >
+                      <Heart
+                        className={`h-4 w-4 mr-1 ${
+                          isInFavoriteList(selectedProduct.id) ? "fill-current" : ""
+                        }`}
+                      />
+                      {isInFavoriteList(selectedProduct.id) ? "Remover" : "Favoritar"}
+                    </button>
                     <button
                       aria-label={`Adicionar ${selectedProduct.name} ao carrinho`}
                       onClick={() => {
                         handleAddToCart(selectedProduct);
                         closeProductModal();
                       }}
-                      className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                      className="flex-1 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer"
                     >
                       Adicionar ao Carrinho
                     </button>

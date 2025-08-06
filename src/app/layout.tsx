@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
+import { FavoriteListProvider } from "@/context/FavoriteList";
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { OrderProvider } from "@/context/OrderContext";
 import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
@@ -17,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "STG Store",
+  title: "STG Catalog",
 };
 
 export default function RootLayout({
@@ -32,32 +34,36 @@ export default function RootLayout({
       >
         <AuthProvider>
           <ThemeProvider>
-              <CartProvider>
-                {children}
+            <OrderProvider>
+              <FavoriteListProvider>
+                <CartProvider>
+                  {children}
                 <Toaster
                   position="top-center"
                   toastOptions={{
                     duration: 3000,
                     style: {
-                      background: '#10B981',
-                      color: '#fff',
-                      borderRadius: '8px',
-                      fontSize: '14px',
-                      fontWeight: '500',
+                      background: "#10B981",
+                      color: "#fff",
+                      borderRadius: "8px",
+                      fontSize: "14px",
+                      fontWeight: "500",
                     },
                     success: {
                       style: {
-                        background: '#10B981',
+                        background: "#10B981",
                       },
                     },
                     error: {
                       style: {
-                        background: '#EF4444',
+                        background: "#EF4444",
                       },
                     },
                   }}
                 />
-              </CartProvider>
+                </CartProvider>
+              </FavoriteListProvider>
+            </OrderProvider>
           </ThemeProvider>
         </AuthProvider>
       </body>

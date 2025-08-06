@@ -8,10 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
-import { createComponentClient } from "@/models/supabase";
 
 export default function RegisterPage() {
-  const supabase = createComponentClient();
   const router = useRouter();
   const { signUp } = useAuth();
   const { isDarkMode } = useTheme();
@@ -44,9 +42,7 @@ export default function RegisterPage() {
 
     try {
       await signUp(email, password, fullName);
-      setSuccess(
-        "Conta criada com sucesso! Verifique seu email para confirmar a conta."
-      );
+      setSuccess("Conta criada com sucesso!");
       setTimeout(() => {
         router.push("/login");
       }, 2000);
@@ -223,15 +219,7 @@ export default function RegisterPage() {
           </Card.Body>
         </Card>
 
-        <div className="mt-8 text-center">
-          <p
-            className={`text-sm ${
-              isDarkMode ? "text-gray-300" : "text-gray-600"
-            }`}
-          >
-            Após o registro, verifique seu email para confirmar a conta
-          </p>
-        </div>
+        <div className="mt-8 text-center"></div>
       </div>
     </div>
   );
