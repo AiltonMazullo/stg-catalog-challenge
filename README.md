@@ -2,10 +2,15 @@
 
 Esse projeto é um desafio prático para vaga de Desenvolvedor (a) FullStack - Com foco em TypeScript e IACODE - STG SOLUCOES DIGITAIS LTDA
 
-Email e senha para testes (Login e senha do projeto e do Gmail - caso queira testar funcionalidades como troca de email, nome ou senha (É necessário entrar no gmail)):
+**Credenciais para Testes**
 
-Email - teste054325@gmail.com
-senha - @Teste_supabase054325
+Você pode utilizar o seguinte e-mail e senha para testar funcionalidades como login, troca de nome, alteração de e-mail e mudança de senha.
+
+⚠️ Atenção: Para testar funcionalidades que envolvem o e-mail (como troca de e-mail ou redefinição de senha), é necessário acessar a conta do Gmail fornecida.
+
+E-mail: teste054325@gmail.com
+
+Senha: @Teste_supabase054325
 
 ## ✨ Sobre o Projeto
 
@@ -111,78 +116,78 @@ O sistema estará disponível em `http://localhost:3000`
 
 #### ✅ **Sistema de Autenticação Completo (Supabase)**
 
-- [x] **Tela de login e registro:** Formulários com validação completa
-- [x] **Autenticação via email/senha:** Sistema robusto do Supabase
-- [x] **Logout funcional:** Limpeza completa da sessão
-- [x] **Proteção de rotas:** Middleware automático (usuários não logados não acessam o catálogo)
-- [x] **Recuperação de senha:** Via email com Supabase Auth (diferencial implementado)
-- [x] **Reset de senha:** Fluxo completo de redefinição
-- [x] **Persistência de sessão:** Mantém usuário logado
-- [x] **Validação de email:** Confirmação obrigatória
+- [✅] **Tela de login e registro:** Formulários com validação completa
+- [✅] **Autenticação via email/senha:** Sistema robusto do Supabase
+- [✅] **Logout funcional:** Limpeza completa da sessão
+- [✅] **Proteção de rotas:** Middleware automático (usuários não logados não acessam o catálogo)
+- [✅] **Recuperação de senha:** Via email com Supabase Auth (diferencial implementado)
+- [✅] **Reset de senha:** Fluxo completo de redefinição
+- [✅] **Persistência de sessão:** Mantém usuário logado
+- [✅] **Validação de email:** Confirmação obrigatória
 
 #### ✅ **Catálogo de Produtos Funcional**
 
-- [x] **Listagem de produtos:** Grid responsivo com imagem, nome, preço e descrição
-- [x] **Busca/filtro por nome:** Sistema de busca em tempo real
-- [x] **Visualização detalhada:** Modal com informações completas do produto
-- [x] **Adicionar produto ao carrinho:** Botão funcional em cada produto
-- [x] **Visualizar carrinho:** Lista com produtos selecionados
-- [x] **Interface responsiva:** Design otimizado para desktop e mobile
-- [x] **Filtros por categoria:** Filtros dinâmicos funcionais
-- [x] **Paginação:** Navegação entre páginas
-- [x] **Loading states:** Indicadores visuais de carregamento
-- [x] **Tratamento de erros:** Fallbacks para falhas de API
+- [✅] **Listagem de produtos:** Grid responsivo com imagem, nome, preço e descrição
+- [✅] **Busca/filtro por nome:** Sistema de busca em tempo real
+- [✅] **Visualização detalhada:** Modal com informações completas do produto
+- [✅] **Adicionar produto ao carrinho:** Botão funcional em cada produto
+- [✅] **Visualizar carrinho:** Lista com produtos selecionados
+- [✅] **Interface responsiva:** Design otimizado para desktop e mobile
+- [✅] **Filtros por categoria:** Filtros dinâmicos funcionais
+- [✅] **Paginação:** Navegação entre páginas
+- [✅] **Loading states:** Indicadores visuais de carregamento
+- [✅] **Tratamento de erros:** Fallbacks para falhas de API
 
 #### ✅ **Carrinho de Compras Completo**
 
-- [x] **Adicionar produtos:** Funcionalidade completa
-- [x] **Remover produtos:** Remoção individual e total
-- [x] **Alterar quantidades:** Controles + e - funcionais
-- [x] **Cálculo de totais:** Subtotal, total e quantidade
-- [x] **Persistência:** Mantém carrinho entre sessões
-- [x] **Validação de estoque:** Controle de quantidade máxima
-- [x] **Estados vazios:** Mensagens quando carrinho vazio
+- [✅] **Adicionar produtos:** Funcionalidade completa
+- [✅] **Remover produtos:** Remoção individual e total
+- [✅] **Alterar quantidades:** Controles + e - funcionais
+- [✅] **Cálculo de totais:** Subtotal, total e quantidade
+- [✅] **Persistência:** Mantém carrinho entre sessões
+- [✅] **Validação de estoque:** Controle de quantidade máxima
+- [✅] **Estados vazios:** Mensagens quando carrinho vazio
 
 #### ✅ **Finalização via WhatsApp**
 
-- [x] **Botão "Finalizar Pedido":** Disponível no carrinho
-- [x] **Gerar mensagem formatada:** Template estruturado com produtos
-- [x] **Redirecionar para wa.me:** Link automático com pedido
-- [x] **Limpar carrinho após envio:** Funcionalidade implementada
-- [x] **Dados do pedido:** Lista completa de produtos
-- [x] **Informações de contato:** Dados do usuário incluídos
-- [x] **Cálculos corretos:** Valores e quantidades precisos
+- [✅] **Botão "Finalizar Pedido":** Disponível no carrinho
+- [✅] **Gerar mensagem formatada:** Template estruturado com produtos
+- [✅] **Redirecionar para wa.me:** Link automático com pedido
+- [✅] **Limpar carrinho após envio:** Funcionalidade implementada
+- [✅] **Dados do pedido:** Lista completa de produtos
+- [✅] **Informações de contato:** Dados do usuário incluídos
+- [✅] **Cálculos corretos:** Valores e quantidades precisos
 
 ### 🌟 **Funcionalidades Bônus/Diferenciais**
 
 #### ✅ **Funcionalidades Bônus Implementadas**
 
-- [x] **Histórico de pedidos do usuário:** Sistema completo de registro de compras
-- [x] **Lista de desejos além do carrinho:** Sistema completo de favoritos/wishlist
-- [x] **Dark mode toggle:** Alternância de tema claro/escuro
-- [x] **Filtros avançados (categoria):** Filtros dinâmicos por categoria
-- [x] **Interface responsiva avançada:** Mobile-first approach otimizado
+- [✅] **Histórico de pedidos do usuário:** Sistema completo de registro de compras
+- [✅] **Lista de desejos além do carrinho:** Sistema completo de favoritos
+- [✅] **Dark mode toggle:** Alternância de tema claro/escuro
+- [✅] **Filtros avançados (categoria):** Filtros dinâmicos por categoria
+- [✅] **Interface responsiva avançada:** Mobile-first approach otimizado
 
 #### ✅ **Diferenciais Técnicos Implementados**
 
-- [x] **Context API para gerenciamento de estado global:** Implementado em todo projeto
-- [x] **Testes unitários (Jest/Testing Library):** Testes abrangentes para componentes, funções, etc.
-- [x] **Custom hooks bem estruturados:** Hooks reutilizáveis
-- [x] **Error boundary para tratamento de erros:** Tratamento gracioso
-- [x] **SEO otimizado (Next.js):** Meta tags e estrutura semântica
-- [x] **Performance otimizada:** Lazy loading e memoização
-- [x] **TypeScript Strict:** Tipagem rigorosa em 100% do código
-- [x] **Middleware personalizado:** Proteção automática de rotas
-- [x] **Services Layer:** Separação clara de responsabilidades
+- [✅] **Context API para gerenciamento de estado global:** Implementado em todo projeto
+- [✅] **Testes unitários (Jest/Testing Library):** Testes abrangentes para componentes, funções, etc.
+- [✅] **Custom hooks bem estruturados:** Hooks reutilizáveis
+- [✅] **Error boundary para tratamento de erros:** Tratamento gracioso
+- [✅] **SEO otimizado (Next.js):** Meta tags e estrutura semântica
+- [✅] **Performance otimizada:** Lazy loading e memoização
+- [✅] **TypeScript Strict:** Tipagem rigorosa em 100% do código
+- [✅] **Middleware personalizado:** Proteção automática de rotas
+- [✅] **Services Layer:** Separação clara de responsabilidades
 
 #### ✅ **Diferenciais UX/UI Implementados**
 
-- [x] **Skeleton loading durante carregamentos:** Estados de loading elegantes
-- [x] **Toast notifications para feedback:** Notificações visuais
-- [x] **Animações suaves (Framer Motion):** Transições CSS otimizadas
-- [x] **Design responsivo avançado:** Breakpoints otimizados
-- [x] **Estados de loading e erro:** Feedback visual completo
-- [x] **Busca em tempo real:** Sistema de busca instantânea
+- [✅] **Skeleton loading durante carregamentos:** Estados de loading elegantes
+- [✅] **Toast notifications para feedback:** Notificações visuais
+- [✅] **Animações suaves (Framer Motion):** Transições CSS otimizadas
+- [✅] **Design responsivo avançado:** Breakpoints otimizados
+- [✅] **Estados de loading e erro:** Feedback visual completo
+- [✅] **Busca em tempo real:** Sistema de busca instantânea
 
 ## 📁 Estrutura do Projeto
 
