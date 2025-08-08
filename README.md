@@ -30,18 +30,21 @@ Durante o desenvolvimento, utilizei ferramentas de Inteligência Artificial de f
 ### **Ferramentas Utilizadas:**
 
 - **ChatGPT (OpenAI)** — 30% do desenvolvimento
+
   - Geração de prompts otimizados para outras IAs
   - Estruturação inicial de componentes React
   - Auxílio na documentação e README
   - Resolução de problemas específicos de TypeScript
 
 - **DeepSeek** — 25% do desenvolvimento
+
   - Refatoramento de código para melhor performance
   - Implementação de padrões de design avançados
   - Otimização de queries e estruturas de dados
   - Resolução de bugs complexos
 
 - **TRAE IDE** — 35% do desenvolvimento
+
   - Suporte de código em tempo real durante toda a codificação
   - Sugestões de melhores práticas React/Next.js
   - Autocomplete inteligente e detecção de erros
@@ -55,6 +58,7 @@ Durante o desenvolvimento, utilizei ferramentas de Inteligência Artificial de f
 ### **Código Manual vs IA:**
 
 **Escrito Manualmente (40%):**
+
 - Lógica de negócio específica do e-commerce
 - Integração com Supabase e configurações
 - Estados complexos e Context API
@@ -62,6 +66,7 @@ Durante o desenvolvimento, utilizei ferramentas de Inteligência Artificial de f
 - Integração WhatsApp personalizada
 
 **Gerado/Assistido por IA (60%):**
+
 - Estrutura inicial dos componentes
 - Estilização com Tailwind CSS
 - Tipagens TypeScript complexas
@@ -105,6 +110,7 @@ O sistema estará disponível em `http://localhost:3000`
 ### 🔒 **Funcionalidades Obrigatórias**
 
 #### ✅ **Sistema de Autenticação Completo (Supabase)**
+
 - [x] **Tela de login e registro:** Formulários com validação completa
 - [x] **Autenticação via email/senha:** Sistema robusto do Supabase
 - [x] **Logout funcional:** Limpeza completa da sessão
@@ -115,6 +121,7 @@ O sistema estará disponível em `http://localhost:3000`
 - [x] **Validação de email:** Confirmação obrigatória
 
 #### ✅ **Catálogo de Produtos Funcional**
+
 - [x] **Listagem de produtos:** Grid responsivo com imagem, nome, preço e descrição
 - [x] **Busca/filtro por nome:** Sistema de busca em tempo real
 - [x] **Visualização detalhada:** Modal com informações completas do produto
@@ -127,6 +134,7 @@ O sistema estará disponível em `http://localhost:3000`
 - [x] **Tratamento de erros:** Fallbacks para falhas de API
 
 #### ✅ **Carrinho de Compras Completo**
+
 - [x] **Adicionar produtos:** Funcionalidade completa
 - [x] **Remover produtos:** Remoção individual e total
 - [x] **Alterar quantidades:** Controles + e - funcionais
@@ -136,6 +144,7 @@ O sistema estará disponível em `http://localhost:3000`
 - [x] **Estados vazios:** Mensagens quando carrinho vazio
 
 #### ✅ **Finalização via WhatsApp**
+
 - [x] **Botão "Finalizar Pedido":** Disponível no carrinho
 - [x] **Gerar mensagem formatada:** Template estruturado com produtos
 - [x] **Redirecionar para wa.me:** Link automático com pedido
@@ -147,6 +156,7 @@ O sistema estará disponível em `http://localhost:3000`
 ### 🌟 **Funcionalidades Bônus/Diferenciais**
 
 #### ✅ **Funcionalidades Bônus Implementadas**
+
 - [x] **Histórico de pedidos do usuário:** Sistema completo de registro de compras
 - [x] **Lista de desejos além do carrinho:** Sistema completo de favoritos/wishlist
 - [x] **Dark mode toggle:** Alternância de tema claro/escuro
@@ -154,7 +164,9 @@ O sistema estará disponível em `http://localhost:3000`
 - [x] **Interface responsiva avançada:** Mobile-first approach otimizado
 
 #### ✅ **Diferenciais Técnicos Implementados**
+
 - [x] **Context API para gerenciamento de estado global:** Implementado em todo projeto
+- [x] **Testes unitários (Jest/Testing Library):** Testes abrangentes para componentes, funções, etc.
 - [x] **Custom hooks bem estruturados:** Hooks reutilizáveis
 - [x] **Error boundary para tratamento de erros:** Tratamento gracioso
 - [x] **SEO otimizado (Next.js):** Meta tags e estrutura semântica
@@ -164,6 +176,7 @@ O sistema estará disponível em `http://localhost:3000`
 - [x] **Services Layer:** Separação clara de responsabilidades
 
 #### ✅ **Diferenciais UX/UI Implementados**
+
 - [x] **Skeleton loading durante carregamentos:** Estados de loading elegantes
 - [x] **Toast notifications para feedback:** Notificações visuais
 - [x] **Animações suaves (Framer Motion):** Transições CSS otimizadas
@@ -177,6 +190,23 @@ O projeto segue uma arquitetura bem organizada e escalável, com separação cla
 
 ```
 src/
+├── __tests__/                    # Testes automatizados da aplicação
+│   ├── compoonents/              # Testes de componentes React
+│   │   ├── ProtectedRoute.test.tsx # Testes do componente
+│   │   └── ui/                   # Testes dos componentes de UI
+│   │       ├── button.test.tsx   # Testes do componente Button
+│   │       ├── card.test.tsx     # Testes do componente Card
+│   │       ├── ConfirmationModal.test.tsx # Testes do modal de
+│   │       └── Input.test.tsx    # Testes do componente Input
+│   ├── context/                  # Testes dos contextos React
+│   │   ├── AuthContext.test.tsx  # Testes do contexto de autenticação
+│   │   ├── CartContext.test.tsx  # Testes do contexto do carrinho
+│   │   ├── FavoriteContext.test.tsx # Testes do contexto de favoritos
+│   │   ├── OrderContext.test.tsx # Testes do contexto de pedidos
+│   │   └── ThemeContext.test.tsx # Testes do contexto de tema
+│   └── services/                 # Testes dos serviços e APIs
+│       ├── products.api.test.tsx # Testes da API de produtos
+│       └── user.api.test.tsx     # Testes da API de usuários
 ├── app/                          # App Router do Next.js 13+
 │   ├── (auth)/                   # Grupo de rotas de autenticação
 │   │   ├── forgot-password/      # Página de recuperação de senha
