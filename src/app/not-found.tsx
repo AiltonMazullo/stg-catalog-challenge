@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -80,7 +79,7 @@ export default function NotFoundPage() {
                   isDarkMode ? "text-white" : "text-gray-900"
                 }`}
               >
-                STG Store
+                STG Catalog
               </h1>
               <p
                 className={`text-xs ${
