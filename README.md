@@ -107,7 +107,7 @@ O sistema estará disponível em `http://localhost:3000`
 
 ## 🔗 Links Importantes
 
-- [Deploy da Aplicação (Vercel)](https://stg-catalog-challenge.vercel.app)
+- [Deploy da Aplicação (Vercel)](https://stg-catalog-challenge-omega.vercel.app)
 - [Repositório no GitHub](https://github.com/AiltonMazullo/stg-catalog-challenge)
 
 ## 📃 Checklist de Funcionalidades
