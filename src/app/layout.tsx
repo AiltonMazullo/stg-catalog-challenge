@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "STG Catalog",
+  title: "STG Store",
 };
 
 export default function RootLayout({
@@ -38,29 +38,29 @@ export default function RootLayout({
               <FavoriteListProvider>
                 <CartProvider>
                   {children}
-                <Toaster
-                  position="top-center"
-                  toastOptions={{
-                    duration: 3000,
-                    style: {
-                      background: "#10B981",
-                      color: "#fff",
-                      borderRadius: "8px",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                    },
-                    success: {
+                  <Toaster
+                    position="top-center"
+                    toastOptions={{
+                      duration: 3000,
                       style: {
                         background: "#10B981",
+                        color: "#fff",
+                        borderRadius: "8px",
+                        fontSize: "14px",
+                        fontWeight: "500",
                       },
-                    },
-                    error: {
-                      style: {
-                        background: "#EF4444",
+                      success: {
+                        style: {
+                          background: "#10B981",
+                        },
                       },
-                    },
-                  }}
-                />
+                      error: {
+                        style: {
+                          background: "#EF4444",
+                        },
+                      },
+                    }}
+                  />
                 </CartProvider>
               </FavoriteListProvider>
             </OrderProvider>

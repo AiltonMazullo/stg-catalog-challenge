@@ -524,7 +524,7 @@ export default function FavoriteListPage() {
                       }`}
                     >
                       <User
-                        className={`h-5 w-5 cursor-pointer ${
+                        className={`h-5 w-5 ${
                           isDarkMode ? "text-gray-300" : "text-gray-600"
                         }`}
                       />

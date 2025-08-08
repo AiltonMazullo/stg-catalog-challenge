@@ -21,6 +21,8 @@ import {
   Eye,
   EyeOff,
   ShoppingBag,
+  Facebook,
+  Chrome,
   Edit2,
   Check,
   X,
@@ -695,7 +697,7 @@ export default function SettingsPage() {
                         isDarkMode ? "text-gray-400" : "text-gray-500"
                       }`}
                     >
-                      Veja seu histórico de pedidos
+                      Acompanhe o status dos seus pedidos
                     </p>
                   </div>
                 </div>

@@ -206,7 +206,7 @@ export default function ProductsPage() {
                   isDarkMode ? "text-white" : "text-gray-900"
                 }`}
               >
-                STG Catalog
+                STG Store
               </h1>
               <p
                 className={`text-xs ${
@@ -322,7 +322,7 @@ export default function ProductsPage() {
                       <button
                         aria-label="Sair da conta"
                         onClick={handleLogout}
-                        className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded cursor-pointer ${
+                        className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded ${
                           isDarkMode ? "hover:bg-red-900/20" : "hover:bg-red-50"
                         }`}
                       >
@@ -625,7 +625,7 @@ export default function ProductsPage() {
                   <button
                     aria-label="Sair da conta"
                     onClick={handleLogout}
-                    className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded cursor-pointer ${
+                    className={`w-full text-left px-3 py-2 text-sm text-red-600 rounded ${
                       isDarkMode ? "hover:bg-red-900/20" : "hover:bg-red-50"
                     }`}
                   >
