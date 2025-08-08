@@ -250,6 +250,26 @@ src/
     └── index.ts                  # Tipos globais da aplicação
 ```
 
+### 📱 **Progressive Web App (PWA)**
+
+Uma das próximas implementações planejadas é a transformação do **STG Catalog** em um **Progressive Web App (PWA)**.
+
+---
+
+## 🤖 Por que Trae AI e não Cursor?
+
+### **Escolha Estratégica: Trae AI**
+
+Durante o desenvolvimento deste projeto, optei pelo **Trae AI** em detrimento do **Cursor** por razões técnicas e estratégicas fundamentais:
+
+**🔄 Cursor vs Trae AI:**
+
+Enquanto o **Cursor** é excelente para **autocompletar código** e **sugestões pontuais**, o **Trae AI** oferece uma **experiência de desenvolvimento colaborativo** mais profunda, essencial para projetos complexos que exigem **arquitetura consistente** e **decisões estratégicas**.
+
+Para este desafio técnico, onde a **qualidade arquitetural** e **consistência** são fundamentais, o Trae AI se mostrou a melhor escolha.
+
+---
+
 ## 🌌 Observações Finais
 
 Este projeto representa um ecossistema completo de e-commerce, com foco em escalabilidade, usabilidade e uso consciente de Inteligência Artificial. Ele explora diferenciais que enriquecem a experiência do usuário e demonstram meu comprometimento com qualidade.
