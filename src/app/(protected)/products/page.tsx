@@ -206,7 +206,7 @@ export default function ProductsPage() {
                   isDarkMode ? "text-white" : "text-gray-900"
                 }`}
               >
-                STG Store
+                STG Catalog
               </h1>
               <p
                 className={`text-xs ${

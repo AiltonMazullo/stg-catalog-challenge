@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "STG Store",
+  title: "STG Catalog",
 };
 
 export default function RootLayout({

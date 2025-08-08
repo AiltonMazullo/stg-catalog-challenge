@@ -21,7 +21,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
 
   // Obter URL de redirecionamento dos parâmetros de busca
-  const redirectTo = searchParams.get('redirectTo') || '/products';
+  const redirectTo = searchParams.get("redirectTo") || "/products";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,7 +58,7 @@ export default function LoginPage() {
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            Entrar na STG Store
+            Entrar na STG Catalog
           </h1>
           <p
             className={`${isDarkMode ? "text-gray-300" : "text-gray-600"} mt-1`}

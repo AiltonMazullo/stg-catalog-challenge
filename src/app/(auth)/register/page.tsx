@@ -69,7 +69,7 @@ export default function RegisterPage() {
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            STG Store
+            STG Catalog
           </h1>
           <p
             className={`${isDarkMode ? "text-gray-300" : "text-gray-600"} mt-1`}
