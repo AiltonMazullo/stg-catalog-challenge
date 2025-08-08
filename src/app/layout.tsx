@@ -20,6 +20,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "STG Catalog",
+  icons: {
+    icon: "/STG.png",
+    shortcut: "/STG.png",
+    apple: "/STG.png",
+  },
 };
 
 export default function RootLayout({

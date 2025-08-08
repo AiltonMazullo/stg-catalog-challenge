@@ -84,7 +84,24 @@ export default function ResetPasswordPage() {
       router.push("/login");
     } catch (err) {
       console.error("Erro ao redefinir senha:", err);
-      setError(err instanceof Error ? err.message : "Erro ao redefinir senha");
+
+      let errorMessage = "Erro ao redefinir senha";
+
+      if (err instanceof Error) {
+        // Traduzir mensagem específica de validação de senha do Supabase
+        if (
+          err.message.includes(
+            "Password should contain at least one character of each"
+          )
+        ) {
+          errorMessage =
+            "A senha deve conter pelo menos:\n• Uma letra minúscula (a-z)\n• Uma letra maiúscula (A-Z)\n• Um número (0-9)\n• Um caractere especial (!@#$%^&*()_+-=[]{};':|\"|<>?,./`~)";
+        } else {
+          errorMessage = err.message;
+        }
+      }
+
+      setError(errorMessage);
       toast.error("Erro ao redefinir senha");
     } finally {
       setIsLoading(false);

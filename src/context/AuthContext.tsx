@@ -87,7 +87,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     if (error) {
-      throw new Error(error.message);
+      // Traduzir mensagem específica de validação de senha do Supabase
+      if (
+        error.message.includes(
+          "Password should contain at least one character of each"
+        )
+      ) {
+        throw new Error(
+          "A senha deve conter pelo menos:\n• Uma letra minúscula (a-z)\n• Uma letra maiúscula (A-Z)\n• Um número (0-9)\n• Um caractere especial (!@#$%^&*()_+-=[]{};':|\"|<>?,./`~)"
+        );
+      } else {
+        throw new Error(error.message);
+      }
     }
   };
 

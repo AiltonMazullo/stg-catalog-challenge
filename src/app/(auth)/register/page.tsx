@@ -47,7 +47,23 @@ export default function RegisterPage() {
         router.push("/login");
       }, 2000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro ao criar conta");
+      let errorMessage = "Erro ao criar conta";
+
+      if (err instanceof Error) {
+        // Traduzir mensagem específica de validação de senha do Supabase
+        if (
+          err.message.includes(
+            "Password should contain at least one character of each"
+          )
+        ) {
+          errorMessage =
+            "A senha deve conter pelo menos:\n• Uma letra minúscula (a-z)\n• Uma letra maiúscula (A-Z)\n• Um número (0-9)\n• Um caractere especial (!@#$%^&*()_+-=[]{};':|\"|<>?,./`~)";
+        } else {
+          errorMessage = err.message;
+        }
+      }
+
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
